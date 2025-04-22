@@ -2,85 +2,348 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>モザラック操作ガイド - カードUI版</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: "Hiragino Sans", "Meiryo", sans-serif;
-      background-color: #f3f4f6;
-    }
-    .card {
-      @apply bg-white shadow-md rounded-2xl p-6 mb-6;
-    }
-    .card h2 {
-      @apply text-xl font-bold text-blue-700 border-b pb-2 mb-4;
-    }
-    .step {
-      @apply mb-4;
-    }
-    .step span {
-      @apply inline-block w-6 h-6 bg-blue-500 text-white text-center rounded-full mr-2;
-    }
-    .screenshot {
-      @apply border rounded-md shadow my-4 mx-auto max-w-full;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モザラック操作マニュアル - 簡単・便利な画像モザイク処理ツール</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 210mm; /* A4 width */
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4299e1;
+            color: #2b6cb0;
+        }
+        h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 5px solid #4299e1;
+            color: #2c5282;
+        }
+        h3 {
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #2b6cb0;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .screenshot {
+            display: block;
+            max-width: 100%;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .step {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f0f7ff;
+            border-radius: 5px;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #4299e1;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .highlight {
+            background-color: #fffde7;
+            padding: 15px;
+            border-left: 4px solid #ffd600;
+            margin-bottom: 20px;
+        }
+        .keyboard-key {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            margin: 0 2px;
+        }
+        .red-arrow {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4299e1;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .footnote {
+            font-size: 14px;
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
 </head>
-<body class="p-4 sm:p-8">
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold text-center text-blue-800 mb-8">モザラック (Mosa-Rakku) 操作マニュアル</h1>
+<body>
+    <div class="container">
+        <h1 class="text-center">モザラック (Mosa-Rakku) 操作マニュアル</h1>
+        
+        <p>モザラックは、画像に簡単にモザイク、黒塗り、白塗り、ガウスぼかしなどの効果を適用できる便利なツールです。このマニュアルでは、初めて使う方でも分かりやすいよう、基本的な操作方法からショートカットキーまで詳しく説明します。</p>
 
-    <div class="card">
-      <h2>はじめに</h2>
-      <p>モザラックは、画像にモザイク・黒塗り・ぼかしを手軽に適用できるツールです。本ガイドでは、操作方法をステップごとに解説します。</p>
-    </div>
+        <h2 id="toc">目次</h2>
+        <ol>
+            <li><a href="#intro">はじめに</a></li>
+            <li><a href="#basic-operation">基本操作</a></li>
+            <li><a href="#detailed-settings">詳細設定</a></li>
+            <li><a href="#mosaic-process">モザイク処理の方法</a></li>
+            <li><a href="#shortcuts">便利なショートカットキー</a></li>
+            <li><a href="#profile-management">プロファイル管理</a></li>
+            <li><a href="#troubleshooting">トラブルシューティング</a></li>
+        </ol>
 
-    <div class="card">
-      <h2>ソフトの起動</h2>
-      <div class="step"><span>1</span>Mosa_Rakku.exe をダブルクリック</div>
-      <div class="step"><span>2</span>メイン画面が表示される</div>
-      <img src="images/Mosa_Rakku_WpmriChWST.jpg" alt="メイン画面" class="screenshot">
-    </div>
+        <h2 id="intro">1. はじめに</h2>
+        <p>モザラック（Mosa-Rakku）は、画像に簡単にモザイク効果を適用するためのツールです。プライバシー保護や機密情報の隠蔽など、様々な場面で活用できます。</p>
 
-    <div class="card">
-      <h2>新規プロファイル作成</h2>
-      <div class="step"><span>1</span>「新規」ボタンをクリック</div>
-      <img src="images/Mosa_Rakku_MLOuMTp6af.jpg" alt="新規プロファイル" class="screenshot">
-      <div class="step"><span>2</span>管理名を入力し「OK」</div>
-      <img src="images/Mosa_Rakku_SmoNOCP7i1.jpg" alt="管理名入力" class="screenshot">
-    </div>
+        <h3>システム要件</h3>
+        <ul>
+            <li>Windows 10/11</li>
+            <li>最小画面解像度: 1024×768</li>
+        </ul>
 
-    <div class="card">
-      <h2>フォルダ設定</h2>
-      <div class="step"><span>1</span>「入力フォルダ」の参照をクリック</div>
-      <div class="step"><span>2</span>対象フォルダを選択</div>
-      <img src="images/Mosa_Rakku_TVbgIi42JH.jpg" alt="入力フォルダ設定" class="screenshot">
-      <div class="step"><span>3</span>「出力フォルダ」も同様に設定</div>
-    </div>
+        <h3>インストール方法</h3>
+        <p>特別なインストール作業は不要です。<code>Mosa_Rakku.exe</code> ファイルを任意の場所に配置して、ダブルクリックで起動できます。</p>
 
-    <div class="card">
-      <h2>モザイクの適用</h2>
-      <div class="step"><span>1</span>画像上で左上から右下にドラッグ</div>
-      <div class="step"><span>2</span>リアルタイムでモザイクが反映</div>
-      <img src="images/Mosa_Rakku_OWuFjFJN8f.jpg" alt="モザイク処理" class="screenshot">
-    </div>
+        <div class="step">
+            <p><span class="step-number">1</span> メインプログラムファイル（Mosa_Rakku.exe）があるフォルダを開きます。</p>
+            <img src="images/explorer_EeUXTIFRZt.jpg" alt="ファイルエクスプローラでのMosa_Rakku.exeファイル" class="screenshot">
+        </div>
 
-    <div class="card">
-      <h2>ショートカットキー</h2>
-      <ul class="list-disc pl-6">
-        <li><strong>F</strong>：次の画像</li>
-        <li><strong>A</strong>：前の画像</li>
-        <li><strong>F5</strong>：画像再読込</li>
-        <li><strong>Ctrl+Z</strong>：やり直し</li>
-        <li><strong>Delete</strong>：終了</li>
-      </ul>
-    </div>
+        <h2 id="basic-operation">2. 基本操作</h2>
 
-    <div class="text-center text-sm text-gray-500 mt-8">
-      モザラック v1.0｜2025年4月更新
+        <h3>ソフトウェアの起動</h3>
+        <div class="step">
+            <p><span class="step-number">1</span> <code>Mosa_Rakku.exe</code> をダブルクリックします。</p>
+            <p><span class="step-number">2</span> 以下のようなメイン画面が表示されます。</p>
+            <img src="images/Mosa_Rakku_WpmriChWST.jpg" alt="モザラックのメイン画面" class="screenshot">
+        </div>
+
+        <h3>新規プロファイルの作成</h3>
+        <div class="step">
+            <p><span class="step-number">1</span> メイン画面上部の「管理名」プルダウンの右側にある「<span class="red-arrow">新規</span>」ボタンをクリックします。</p>
+            <img src="images/Mosa_Rakku_MLOuMTp6af.jpg" alt="新規ボタンをクリック" class="screenshot">
+            
+            <p><span class="step-number">2</span> 「設定の追加」ダイアログが表示されるので、任意の管理名を入力し「OK」をクリックします。（例: 「123」）</p>
+            <img src="images/Mosa_Rakku_SmoNOCP7i1.jpg" alt="管理名を入力" class="screenshot">
+            
+            <p><span class="step-number">3</span> 入力した管理名が「管理名」プルダウンに表示されます。</p>
+        </div>
+
+        <h3>フォルダの設定</h3>
+        <div class="step">
+            <p><span class="step-number">1</span> 「入力フォルダ」の右側にある「<span class="red-arrow">参照</span>」ボタンをクリックします。</p>
+            <img src="images/Mosa_Rakku_MLOuMTp6af.jpg" alt="入力フォルダの参照ボタン" class="screenshot">
+            
+            <p><span class="step-number">2</span> モザイク処理を行いたい画像が格納されているフォルダを選択します。</p>
+            <div class="highlight">
+                <p><i class="fas fa-lightbulb text-yellow-500 mr-2"></i> <strong>便利な使い方</strong>: あらかじめ「input」などの名前のフォルダを用意し、そこに処理したい画像をまとめておくと効率的です。</p>
+            </div>
+            
+            <p><span class="step-number">3</span> 同様に「出力フォルダ」の右側にある「<span class="red-arrow">参照</span>」ボタンをクリックし、処理後の画像を保存するフォルダを選択します。</p>
+            <img src="images/Mosa_Rakku_TVbgIi42JH.jpg" alt="出力フォルダの参照ボタン" class="screenshot">
+            
+            <p><span class="step-number">4</span> サブフォルダ内の画像も一括で処理したい場合は、「<span class="red-arrow">サブフォルダを含める</span>」にチェックを入れます。</p>
+            <img src="images/Mosa_Rakku_egu35wINf4.jpg" alt="サブフォルダを含めるオプション" class="screenshot">
+        </div>
+
+        <h2 id="detailed-settings">3. 詳細設定</h2>
+
+        <h3>画像検索と表示</h3>
+        <div class="step">
+            <p><span class="step-number">1</span> フォルダの設定が完了したら、「<span class="red-arrow">画像検索</span>」ボタンをクリックします。</p>
+            <p>ショートカットキー <span class="keyboard-key">F5</span> でも同じ操作が可能です。</p>
+            <img src="images/Mosa_Rakku_dldv5ZwkNr.jpg" alt="画像検索ボタン" class="screenshot">
+            
+            <p><span class="step-number">2</span> 指定したフォルダ内の画像が読み込まれ、表示されます。</p>
+            <img src="images/Mosa_Rakku_AaeXSrlqle.jpg" alt="画像が表示された状態" class="screenshot">
+        </div>
+
+        <h3>処理方法の選択</h3>
+        <div class="step">
+            <p><span class="step-number">1</span> 「<span class="red-arrow">モザイク</span>」「黒塗り」「白塗り」「ガウスぼかし」から適用したい効果を選択します。</p>
+            <p>デフォルトでは「モザイク」が選択されています。</p>
+            <img src="images/Mosa_Rakku_yJc7LNMxVA.jpg" alt="処理方法の選択" class="screenshot">
+            
+            <p><span class="step-number">2</span> 効果の強さ（数値）を調整します。</p>
+            <ul>
+                <li>モザイクやガウスぼかしの場合、この数値が大きいほど効果が強くなります。</li>
+                <li>例: モザイクの場合は「30」に設定すると、30ピクセル四方のモザイクが適用されます。</li>
+            </ul>
+            
+            <p><span class="step-number">3</span> 設定が完了したら「保存」ボタンをクリックして、現在の設定を管理名に関連付けて保存します。</p>
+        </div>
+
+        <h3>Exif情報の保存</h3>
+        <div class="step">
+            <p>画像のメタデータ（Exif情報）を保持したい場合は、「<span class="red-arrow">Exifを保存する</span>」にチェックを入れます。</p>
+            <img src="images/Mosa_Rakku_gydKmfVPHJ.jpg" alt="Exifを保存するオプション" class="screenshot">
+        </div>
+
+        <h2 id="mosaic-process">4. モザイク処理の方法</h2>
+        <div class="step">
+            <p><span class="step-number">1</span> 画像上でモザイクを適用したい範囲の左上の位置でマウスの左ボタンを押します。</p>
+            
+            <p><span class="step-number">2</span> そのままマウスを右下方向にドラッグします。</p>
+            <p>ドラッグ中、リアルタイムで選択範囲にモザイク効果が適用されます。</p>
+            <img src="images/Mosa_Rakku_OWuFjFJN8f.jpg" alt="モザイク処理の例" class="screenshot">
+            
+            <p><span class="step-number">3</span> 画像内の他の部分にも同じ手順でモザイクを適用できます。</p>
+            
+            <p><span class="step-number">4</span> 次の画像に進むには <span class="keyboard-key">F</span> キーを押します。</p>
+            
+            <p><span class="step-number">5</span> 前の画像に戻るには <span class="keyboard-key">A</span> キーを押します。</p>
+            
+            <p><span class="step-number">6</span> すべての画像の処理が完了すると、「すべての画像を処理しました。」というメッセージが表示されます。</p>
+            <img src="images/Mosa_Rakku_Qn3DyHmyDe.jpg" alt="処理完了メッセージ" class="screenshot">
+        </div>
+
+        <h2 id="shortcuts">5. 便利なショートカットキー</h2>
+        <p>モザラックでは、効率的な操作のために以下のショートカットキーが用意されています。</p>
+        
+        <table>
+            <tr>
+                <th>キー</th>
+                <th>機能</th>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">F</span></td>
+                <td>次の画像に進む</td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">A</span></td>
+                <td>前の画像に戻る</td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">F5</span></td>
+                <td>画像検索（入力フォルダ内の画像を再読み込み）</td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">Ctrl</span> + <span class="keyboard-key">Z</span></td>
+                <td>直前のモザイク操作を取り消す</td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">Ctrl</span> + <span class="keyboard-key">G</span></td>
+                <td>現在の画像の編集をすべてリセット（元の状態に戻す）</td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">ESC</span></td>
+                <td>現在の操作をキャンセル</td>
+            </tr>
+            <tr>
+                <td><span class="keyboard-key">Delete</span></td>
+                <td>アプリケーションを終了</td>
+            </tr>
+        </table>
+        
+        <p>これらのショートカットキーは「<span class="red-arrow">操作ガイド</span>」ボタンをクリックすると表示される画面でも確認できます。</p>
+        <img src="images/Mosa_Rakku_GJtD8DgANl.jpg" alt="操作ガイド" class="screenshot">
+
+        <h2 id="profile-management">6. プロファイル管理</h2>
+
+        <h3>既存プロファイルの更新</h3>
+        <div class="step">
+            <p>設定を変更した後、「<span class="red-arrow">更新</span>」ボタンをクリックすると、現在選択されている管理名の設定情報が更新されます。</p>
+        </div>
+
+        <h3>プロファイルの削除</h3>
+        <div class="step">
+            <p>不要になった管理名（プロファイル）は「削除」ボタンをクリックして削除できます。</p>
+        </div>
+
+        <h2 id="troubleshooting">7. トラブルシューティング</h2>
+
+        <h3>画像が表示されない場合</h3>
+        <div class="step">
+            <ul>
+                <li>指定した入力フォルダに対応形式の画像ファイルが存在するか確認してください。</li>
+                <li>「画像検索」ボタンを押して、再度読み込みを行ってください。</li>
+            </ul>
+        </div>
+
+        <h3>変更が保存されない場合</h3>
+        <div class="step">
+            <ul>
+                <li>設定変更後に「保存」ボタンをクリックしているか確認してください。</li>
+                <li>アプリケーションを管理者権限で実行してみてください。</li>
+            </ul>
+        </div>
+
+        <h3>モザイクがかからない場合</h3>
+        <div class="step">
+            <ul>
+                <li>「モザイク」「黒塗り」「白塗り」「ガウスぼかし」のいずれかが選択されているか確認してください。</li>
+                <li>ドラッグ操作が正しく行われているか確認してください（左上から右下へドラッグ）。</li>
+            </ul>
+        </div>
+
+        <div class="footnote">
+            <p>モザラックを使いこなすことで、画像のプライバシー保護や機密情報の隠蔽を簡単に行うことができます。このマニュアルが皆様のお役に立てば幸いです。</p>
+            <p>ご不明な点やご質問がございましたら、お気軽にお問い合わせください。</p>
+            <hr>
+            <p>マニュアル作成日: 2025年4月20日<br>
+            バージョン: v1.0</p>
+            <h3>モザラック v1.0 - 主な機能</h3>
+            <ul>
+                <li>シンプルで直感的なユーザーインターフェース</li>
+                <li>複数の効果（モザイク、黒塗り、白塗り、ガウスぼかし）</li>
+                <li>複数フォルダの一括処理機能</li>
+                <li>効果の強さ調整機能</li>
+                <li>プロファイル管理で複数の設定を保存可能</li>
+                <li>Exif情報の保持機能</li>
+            </ul>
+            <p>お疲れ様でした！これでモザラックの基本的な使い方をマスターしていただけたかと思います。快適なモザイク処理ライフをお楽しみください！</p>
+        </div>
     </div>
-  </div>
 </body>
 </html>
+    
+    
